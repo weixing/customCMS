@@ -180,6 +180,11 @@ return [
 
         //custom
         //App\Providers\TestProvider::class,
+        
+        /*
+         * UEditor for laravel
+         */
+        Overtrue\LaravelUEditor\UEditorServiceProvider::class,
 
     ],
 

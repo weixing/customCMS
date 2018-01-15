@@ -20,7 +20,7 @@
                 <tbody>
                 @foreach ($categoryList as $category)
                 <tr>
-                  <td><span class="glyphicon @if ($category->status == 0) glyphicon-remove @else glyphicon-ok @endif" id="categoryStatusIcon_{{$category->cid}}"></span></td>
+                  <td><span class="glyphicon @if ($category->status == 0) glyphicon-remove text-red @else glyphicon-ok text-green @endif" id="categoryStatusIcon_{{$category->cid}}"></span></td>
                   <td>{{$category->name}}</td>
                   <td>{{$category->alias}}</td>
                   <td>
@@ -34,6 +34,24 @@
                     @endif
                   </td>
                 </tr>
+
+                @foreach ($category->childList as $childCategory)
+                <tr>
+                  <td><span class="glyphicon @if ($childCategory->status == 0) glyphicon-remove text-red @else glyphicon-ok text-green @endif" id="categoryStatusIcon_{{$childCategory->cid}}"></span></td>
+                  <td><span style="padding:0 20px;">┗ </span>{{$childCategory->name}}</td>
+                  <td>{{$childCategory->alias}}</td>
+                  <td>
+                    <a type="button" class="btn btn-block btn-info btn-xs" href="/category/edit/{{$childCategory->cid}}">编辑</a>
+                  </td>
+                  <td>
+                    @if ($childCategory->status == 1)
+                    <button type="button" class="btn btn-block btn-danger btn-xs" id="editCategoryStatus_{{$childCategory->cid}}">删除</button>
+                    @else
+                    <button type="button" class="btn btn-block btn-success btn-xs" id="editCategoryStatus_{{$childCategory->cid}}">恢复</button>
+                    @endif
+                  </td>
+                </tr>
+                @endforeach
                 @endforeach
                 </tbody>
                 <tfoot>

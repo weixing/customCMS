@@ -5,7 +5,7 @@
     <section class="content">
       <div class="row">
         <!-- right column -->
-        <div class="col-md-6">
+        <div class="col-md-12">
           <!-- Horizontal Form -->
           <!-- general form elements disabled -->
           <div class="box box-warning">

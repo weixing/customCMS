@@ -1,6 +1,9 @@
 <?PHP
 namespace App\Services;
 
+use Illuminate\Http\UploadedFile;
+use Config;
+
 class Helper {
 
     /**
@@ -38,5 +41,35 @@ class Helper {
         return view('ShowMessage')
             ->with('message', $message)
             ->with('url', $url);
+    }
+
+    /**
+     * Format the storage path.
+     *
+     * @param UploadedFile $file
+     *
+     * @return mixed
+     */
+    public static function formatPath(UploadedFile $file)
+    {
+        $ext = '.'.$file->getClientOriginalExtension();
+
+        $filename = md5($file->getFilename()).$ext;
+        $path = Config::get('constants.imagePathFormat');
+        $replacement = array_merge(explode('-', date('Y-y-m-d-H-i-s')), [$filename, time()]);
+        $placeholders = ['{yyyy}', '{yy}', '{mm}', '{dd}', '{hh}', '{ii}', '{ss}', '{filename}', '{time}'];
+        $path = str_replace($placeholders, $replacement, $path);
+
+        //替换随机字符串
+        if (preg_match('/\{rand\:([\d]*)\}/i', $path, $matches)) {
+            $length = min($matches[1], strlen(PHP_INT_MAX));
+            $path = preg_replace('/\{rand\:[\d]*\}/i', str_pad(mt_rand(0, pow(10, $length) - 1), $length, '0', STR_PAD_LEFT), $path);
+        }
+
+        if (!str_contains($path, $filename)) {
+            $path = str_finish($path, '/').$filename;
+        }
+
+        return $path;
     }
 }

@@ -24,8 +24,24 @@ class CategoryController extends Controller
 
     public function index()
     {
-        $categoryList = Category::orderBy('cid', 'asc')
+        $categoryListTmp = Category::orderBy('parent_cid', 'desc')
+            ->orderBy('cid', 'asc')
             ->get();
+
+        $categoryList = []; //用于保存整理好的分类列表
+        $categoryChildList = [];    //用于保存上级分类和下级分类关系
+        foreach ($categoryListTmp as $oneCategory) {
+            if (0 == $oneCategory->parent_cid) {
+                if (isset($categoryChildList[$oneCategory->cid])) {
+                    $oneCategory->childList = $categoryChildList[$oneCategory->cid];
+                } else {
+                    $oneCategory->childList = [];
+                }
+                $categoryList[] = $oneCategory;
+            } else {
+                $categoryChildList[$oneCategory->parent_cid][] = $oneCategory;
+            }
+        }
 
         return view('category.list')
             ->with('pageName', trans('page.categoryList'))
@@ -69,7 +85,10 @@ class CategoryController extends Controller
             return Helper::showMessage('参数错误');
         }
 
+        $topCategoryList = Category::getTopCategoryList();
+
         return view('category.edit')
+            ->with('topCategoryList', $topCategoryList)
             ->with('pageName', trans('page.categoryEdit'))
             ->with('pageDesc', trans('page.categoryEditDesc'))
             ->with('category', $category);
@@ -80,8 +99,8 @@ class CategoryController extends Controller
         $validateRule = [
             'cid' => 'required|numeric',
             'name' => 'required|max:100|min:1',
-            'path' => 'required|max:100|min:1',
-            'domain' => 'required|max:100|min:1',
+            'parent_cid' => 'numeric',
+            'alias' => 'required|alpha_dash|max:100|min:1',
             'status' => 'numeric|min:1',
         ];
 
@@ -96,8 +115,8 @@ class CategoryController extends Controller
         }
 
         $category->name = $request->input('name');
-        $category->path = $request->input('path');
-        $category->domain = $request->input('domain');
+        $category->alias = $request->input('alias');
+        $category->parent_cid = $request->input('parent_cid');
         $category->status = $request->input('status', 0);
 
         if (!$category->save()) {

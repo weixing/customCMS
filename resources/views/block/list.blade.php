@@ -15,16 +15,22 @@
                   <th>区块名称</th>
                   <th>别名</th>
                   <th>区块类别</th>
+                  <th>编辑内容</th>
                   <th colspan=2>操作</th>
                 </tr>
                 </thead>
                 <tbody>
                 @foreach ($blockList as $block)
                 <tr>
-                  <td><span class="glyphicon @if ($block->status == 0) glyphicon-remove @else glyphicon-ok @endif" id="blockStatusIcon_{{$block->bid}}"></span></td>
+                  <td><span class="glyphicon @if ($block->status == 0) glyphicon-remove text-red @else glyphicon-ok text-green @endif" id="blockStatusIcon_{{$block->bid}}"></span></td>
                   <td>{{$block->name}}</td>
                   <td>template_{{$block->bid}}</td>
                   <td>@if (isset($blockType[$block->type])) {{$blockType[$block->type]}} @endif</td>
+                  <td>
+                    @if (2 == $block->type)
+                    <a type="button" class="btn btn-block btn-primary btn-xs" href="/block/editContent/{{$block->bid}}">编辑内容</a>
+                    @endif
+                  </td>
                   <td>
                     <a type="button" class="btn btn-block btn-info btn-xs" href="/block/edit/{{$block->bid}}">编辑</a>
                   </td>

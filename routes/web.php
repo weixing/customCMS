@@ -50,6 +50,7 @@ Route::group(['prefix' => '/'], function()
   Route::get('/block/list', 'CMS\BlockController@index');
   Route::get('/block/edit/{blockId}', 'CMS\BlockController@edit');
   Route::get('/block/edit', 'CMS\BlockController@edit');
+  Route::get('/block/editContent/{blockId}', 'CMS\BlockController@editContent');
   Route::put('/block/editRun', 'CMS\BlockController@editRun');
   Route::get('/block/editStatus', 'CMS\BlockController@editStatus');
 
@@ -59,11 +60,13 @@ Route::group(['prefix' => '/'], function()
   Route::put('/category/editRun', 'CMS\CategoryController@editRun');
   Route::get('/category/editStatus', 'CMS\CategoryController@editStatus');
 
-  Route::get('/content/list', 'CMS\ContentController@index');
+  Route::get('/content/list/', 'CMS\ContentController@index');
+  Route::get('/content/list/{page}', 'CMS\ContentController@index');
   Route::get('/content/edit/{contentId}', 'CMS\ContentController@edit');
   Route::get('/content/edit', 'CMS\ContentController@edit');
   Route::put('/content/editRun', 'CMS\ContentController@editRun');
   Route::get('/content/editStatus', 'CMS\ContentController@editStatus');
+  Route::get('/content/validate', 'CMS\ContentController@validateRun');
 
   //passport管理
   Route::get('/passport/user/list', 'Passport\PassportUserController@index');

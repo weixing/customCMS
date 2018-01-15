@@ -21,7 +21,7 @@
                 <tbody>
                 @foreach ($siteList as $site)
                 <tr>
-                  <td><span class="glyphicon @if ($site->status == 0) glyphicon-remove @else glyphicon-ok @endif" id="siteStatusIcon_{{$site->sid}}"></span></td>
+                  <td><span class="glyphicon @if ($site->status == 0) glyphicon-remove text-red @else glyphicon-ok text-green @endif" id="siteStatusIcon_{{$site->sid}}"></span></td>
                   <td>{{$site->name}}</td>
                   <td>{{$site->domain}}</td>
                   <td>{{$site->path}}</td>

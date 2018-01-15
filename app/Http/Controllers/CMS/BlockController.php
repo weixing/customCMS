@@ -109,4 +109,9 @@ class BlockController extends Controller
 
         return Helper::showMessage('操作成功', '/block/edit/'.$block->bid);
     }
+
+    public function editContent()
+    {
+        echo 'aa';
+    }
 }

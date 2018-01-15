@@ -28,14 +28,18 @@ $(document).ready(function(){
                         elementObj.addClass('btn-success');
                         elementObj.html('恢复');
                         iconObj.removeClass('glyphicon-ok');
+                        iconObj.removeClass('text-green');
                         iconObj.addClass('glyphicon-remove');
+                        iconObj.addClass('text-red');
 
                     } else {
                         elementObj.removeClass('btn-success');
                         elementObj.addClass('btn-danger');
                         elementObj.html('删除');
                         iconObj.removeClass('glyphicon-remove');
+                        iconObj.removeClass('text-red');
                         iconObj.addClass('glyphicon-ok');
+                        iconObj.addClass('text-green');
                     }
                 }
             });
@@ -70,14 +74,18 @@ $(document).ready(function(){
                         elementObj.addClass('btn-success');
                         elementObj.html('恢复');
                         iconObj.removeClass('glyphicon-ok');
+                        iconObj.removeClass('text-green');
                         iconObj.addClass('glyphicon-remove');
+                        iconObj.addClass('text-red');
 
                     } else {
                         elementObj.removeClass('btn-success');
                         elementObj.addClass('btn-danger');
                         elementObj.html('删除');
                         iconObj.removeClass('glyphicon-remove');
+                        iconObj.removeClass('text-red');
                         iconObj.addClass('glyphicon-ok');
+                        iconObj.addClass('text-green');
                     }
                 }
             });
@@ -111,14 +119,18 @@ $(document).ready(function(){
                         elementObj.addClass('btn-success');
                         elementObj.html('恢复');
                         iconObj.removeClass('glyphicon-ok');
+                        iconObj.removeClass('text-green');
                         iconObj.addClass('glyphicon-remove');
+                        iconObj.addClass('text-red');
 
                     } else {
                         elementObj.removeClass('btn-success');
                         elementObj.addClass('btn-danger');
                         elementObj.html('删除');
                         iconObj.removeClass('glyphicon-remove');
+                        iconObj.removeClass('text-red');
                         iconObj.addClass('glyphicon-ok');
+                        iconObj.addClass('text-green');
                     }
                 }
             });
@@ -152,14 +164,18 @@ $(document).ready(function(){
                         elementObj.addClass('btn-success');
                         elementObj.html('恢复');
                         iconObj.removeClass('glyphicon-ok');
+                        iconObj.removeClass('text-green');
                         iconObj.addClass('glyphicon-remove');
+                        iconObj.addClass('text-red');
 
                     } else {
                         elementObj.removeClass('btn-success');
                         elementObj.addClass('btn-danger');
                         elementObj.html('删除');
                         iconObj.removeClass('glyphicon-remove');
+                        iconObj.removeClass('text-red');
                         iconObj.addClass('glyphicon-ok');
+                        iconObj.addClass('text-green');
                     }
                 }
             });
@@ -193,14 +209,18 @@ $(document).ready(function(){
                         elementObj.addClass('btn-success');
                         elementObj.html('恢复');
                         iconObj.removeClass('glyphicon-ok');
+                        iconObj.removeClass('text-green');
                         iconObj.addClass('glyphicon-remove');
+                        iconObj.addClass('text-red');
 
                     } else {
                         elementObj.removeClass('btn-success');
                         elementObj.addClass('btn-danger');
                         elementObj.html('删除');
                         iconObj.removeClass('glyphicon-remove');
+                        iconObj.removeClass('text-red');
                         iconObj.addClass('glyphicon-ok');
+                        iconObj.addClass('text-green');
                     }
                 }
             });
@@ -234,14 +254,18 @@ $(document).ready(function(){
                         elementObj.addClass('btn-success');
                         elementObj.html('恢复');
                         iconObj.removeClass('glyphicon-ok');
+                        iconObj.removeClass('text-green');
                         iconObj.addClass('glyphicon-remove');
+                        iconObj.addClass('text-red');
 
                     } else {
                         elementObj.removeClass('btn-success');
                         elementObj.addClass('btn-danger');
                         elementObj.html('删除');
                         iconObj.removeClass('glyphicon-remove');
+                        iconObj.removeClass('text-red');
                         iconObj.addClass('glyphicon-ok');
+                        iconObj.addClass('text-green');
                     }
                 }
             });
@@ -275,14 +299,66 @@ $(document).ready(function(){
                         elementObj.addClass('btn-success');
                         elementObj.html('恢复');
                         iconObj.removeClass('glyphicon-ok');
+                        iconObj.removeClass('text-green');
                         iconObj.addClass('glyphicon-remove');
+                        iconObj.addClass('text-red');
 
                     } else {
                         elementObj.removeClass('btn-success');
                         elementObj.addClass('btn-danger');
                         elementObj.html('删除');
                         iconObj.removeClass('glyphicon-remove');
+                        iconObj.removeClass('text-red');
                         iconObj.addClass('glyphicon-ok');
+                        iconObj.addClass('text-green');
+                    }
+                }
+            });
+		});
+
+    $("button[id^='editContentStatus_']").click(	//修改发布点的status状态
+		function()
+		{
+			var elementId = $(this).attr('id');
+            var contentId = elementId.replace('editContentStatus_', '');
+            var elementObj = $(this);
+            var iconObj = $('#contentStatusIcon_'+contentId);
+            var validateObj = $('#contentValidate_'+contentId);
+
+            var contentStatus = 2;
+            if ($(this).hasClass('btn-danger')) {
+                contentStatus = 0;
+            }
+
+            var ajax_url = '/content/editStatus/?cid='+contentId+'&status='+contentStatus
+            $.ajax({
+                url: ajax_url,
+                type: 'GET',
+                error: function()
+                {
+                    alert('Error loading XML document');
+                },
+                success: function(xml)
+                {
+                    if (contentStatus == 0) {
+                        elementObj.removeClass('btn-danger');
+                        elementObj.addClass('btn-success');
+                        elementObj.html('恢复');
+                        validateObj.html('已删除');
+                        iconObj.removeClass('glyphicon-ok');
+                        iconObj.removeClass('text-green');
+                        iconObj.addClass('glyphicon-remove');
+                        iconObj.addClass('text-red');
+
+                    } else {
+                        elementObj.removeClass('btn-success');
+                        elementObj.addClass('btn-danger');
+                        elementObj.html('删除');
+                        validateObj.html('待审核');
+                        iconObj.removeClass('glyphicon-remove');
+                        iconObj.removeClass('text-red');
+                        iconObj.addClass('glyphicon-ok');
+                        iconObj.addClass('text-green');
                     }
                 }
             });

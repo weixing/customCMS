@@ -19,7 +19,7 @@
                 <tbody>
                 @foreach ($roleList as $role)
                 <tr>
-                  <td><span class="glyphicon @if ($role->status == 0) glyphicon-remove @else glyphicon-ok @endif" id="roleStatusIcon_{{$role->rid}}"></span></td>
+                  <td><span class="glyphicon @if ($role->status == 0) glyphicon-remove text-red @else glyphicon-ok text-green @endif" id="roleStatusIcon_{{$role->rid}}"></span></td>
                   <td>{{$role->name}}</td>
                   <td>
                     <a type="button" class="btn btn-block btn-info btn-xs" href="/role/edit/{{$role->rid}}">编辑</a>

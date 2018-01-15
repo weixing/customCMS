@@ -5,7 +5,7 @@
     <section class="content">
       <div class="row">
         <!-- right column -->
-        <div class="col-md-6">
+        <div class="col-md-12">
           <!-- Horizontal Form -->
           <!-- general form elements disabled -->
           <div class="box box-warning">
@@ -35,6 +35,34 @@
                     启用
                   </label>
                 </div>
+              </div>
+            </div>
+
+            <!-- 字段设置，用于保存动态区块的推荐字段 -->
+            <div class="box box-info">
+              <div class="box-header">
+                <h3 class="box-title">字段设置</h3>
+                <button type="button" class="btn btn-success pull-right">添加</button>
+              </div>
+              <div class="box-body">
+                <!-- Color Picker -->
+                <div class="row">
+                  <div class="col-xs-3">
+                    <input type="text" class="form-control" placeholder="顶端的">
+                  </div>
+                  <div class="col-xs-4">
+                    <input type="text" class="form-control" placeholder="别别别">
+                  </div>
+                  <div class="col-xs-3">
+                    <button type="button" class="btn btn-danger">删除</button>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!-- 提交按钮 -->
+            <div class="box box-success">
+              <div class="form-group">
                 <div class="box-footer">
                   <input type="hidden" name="bid" value="{{$block->bid}}">
                   <?php echo method_field('PUT'); ?>

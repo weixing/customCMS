@@ -21,7 +21,7 @@
                 <tbody>
                 @foreach ($userList as $user)
                 <tr>
-                  <td><span class="glyphicon @if ($user->status == 0) glyphicon-remove @else glyphicon-ok @endif" id="userStatusIcon_{{$user->uid}}"></span></td>
+                  <td><span class="glyphicon @if ($user->status == 0) glyphicon-remove text-red @else glyphicon-ok text-green @endif" id="userStatusIcon_{{$user->uid}}"></span></td>
                   <td>{{$user->account}}</td>
                   <td>{{$user->name}}</td>
                   <td>{{$roleList[$user->rid]->name}}</td>

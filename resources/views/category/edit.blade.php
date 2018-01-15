@@ -5,7 +5,7 @@
     <section class="content">
       <div class="row">
         <!-- right column -->
-        <div class="col-md-6">
+        <div class="col-md-12">
           <!-- Horizontal Form -->
           <!-- general form elements disabled -->
           <div class="box box-warning">
@@ -19,15 +19,18 @@
                 </div>
                 <div class="form-group">
                   <label>上级分类</label>
-                  <select class="form-control" name="rid">
-                    @foreach ($roleList as $oneRole)
-                    <option value="{{$oneRole->rid}}" @if ($oneRole->rid == $user->rid) selected @endif>{{$oneRole->name}}</option>
+                  <select class="form-control" name="parent_cid">
+                    <option value="0">请选择</option>
+                    @foreach ($topCategoryList as $oneCategory)
+                    @if ($oneCategory->cid != $category->cid)
+                    <option value="{{$oneCategory->cid}}" @if ($oneCategory->cid == $category->parent_cid) selected @endif>{{$oneCategory->name}}</option>
+                    @endif
                     @endforeach
                   </select>
                 </div>
                 <div class="form-group">
                   <label>别名</label>
-                  <input type="text" class="form-control" value="{{$category->alias}}" name="domain">
+                  <input type="text" class="form-control" value="{{$category->alias}}" name="alias">
                 </div>
                 <div class="form-group">
                   <label>
@@ -36,7 +39,7 @@
                   </label>
                 </div>
                 <div class="box-footer">
-                  <input type="hidden" name="sid" value="{{$category->sid}}">
+                  <input type="hidden" name="cid" value="{{$category->cid}}">
                   <?php echo method_field('PUT'); ?>
                   <?php echo csrf_field(); ?>
                   <button type="submit" class="btn btn-primary">提交修改</button>

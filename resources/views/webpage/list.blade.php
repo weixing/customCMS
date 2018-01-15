@@ -21,7 +21,7 @@
                 <tbody>
                 @foreach ($webpageList as $webpage)
                 <tr>
-                  <td><span class="glyphicon @if ($webpage->status == 0) glyphicon-remove @else glyphicon-ok @endif" id="webpageStatusIcon_{{$webpage->wpid}}"></span></td>
+                  <td><span class="glyphicon @if ($webpage->status == 0) glyphicon-remove text-red @else glyphicon-ok text-green @endif" id="webpageStatusIcon_{{$webpage->wpid}}"></span></td>
                   <td>{{$webpage->name}}</td>
                   <td>@if (isset($siteList[$webpage->sid])){{$siteList[$webpage->sid]->name}}@endif</td>
                   <td>@if (isset($siteList[$webpage->sid]))<a href="http://{{$siteList[$webpage->sid]->domain}}{{$webpage->url}}" target="blank">{{$webpage->url}}</a>@endif</td>

@@ -27,7 +27,7 @@
                 </thead>
                 <tbody>
                 <tr>
-                  <td><span class="glyphicon @if ($auth->status == 0) glyphicon-remove @else glyphicon-ok @endif" id="authStatusIcon_{{$auth->aid}}"></span></td>
+                  <td><span class="glyphicon @if ($auth->status == 0) glyphicon-remove text-red @else glyphicon-ok text-green @endif" id="authStatusIcon_{{$auth->aid}}"></span></td>
                   <td>{{$auth->name}}</td>
                   <td>{{$auth->order}}</td>
                   <td></td>
@@ -47,7 +47,7 @@
                 </tr>
                 @foreach ($subAuthList[$auth->aid] as $subAuth)
                 <tr>
-                  <td><span class="glyphicon @if ($subAuth->status == 0) glyphicon-remove @else glyphicon-ok @endif" id="authStatusIcon_{{$subAuth->aid}}"></span></td>
+                  <td><span class="glyphicon @if ($subAuth->status == 0) glyphicon-remove text-red @else glyphicon-ok text-green @endif" id="authStatusIcon_{{$subAuth->aid}}"></span></td>
                   <td></td>
                   <td>{{$subAuth->name}}</td>
                   <td>{{$subAuth->order}}</td>
